@@ -174,7 +174,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 	*/
     public void mouseReleased(MouseEvent e) {
         if(chessPiece == null) return;
- 
+
         chessPiece.setVisible(false);
 		Boolean success =false;
         Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
@@ -207,6 +207,42 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 			If a Pawn makes it to the top of the other side, the Pawn can turn into any other piece, for 
 			demonstration purposes the Pawn here turns into a Queen.
 		*/
+
+		if (pieceName.contains("Knight")){
+			if(((landingX<0)||(landingX>7))||((landingY<0)||landingY>7)){
+			validMove = false;
+		}
+		else{
+				if (((landingX == startX + 1) && (landingY == startY + 2)) || ((landingX == startX - 1) && (landingY == startY + 2)) || ((landingX ==
+				startX + 2) && (landingY == startY + 1)) || ((landingY == startY + 1)) || ((landingX == startX + 1) &&
+				(landingY == startY - 2)) || ((landingX == startX - 1) && (landingY == startY - 2)) || ((landingX == startX + 2 && (landingY ==
+				startY - 1)) || ((landingX == startX - 2) && (landingY == startY - 1)))){
+
+					if(piecePresent(x,y)){
+						System.out.println(pieceName);
+						if(pieceName.contains("White")){
+							if(checkOpponent("Black",x,y)){
+								validMove = true;
+							}
+							else{
+								validMove = false;
+							}
+						}
+						else{
+							if(checkOpponent("White",x,y)){
+								validMove = true;
+							}
+							else{
+								validMove = false;
+							}
+						}
+					}
+				}
+				else{
+					validMove = true;
+				}
+			}
+		}
 		if(pieceName.equals("BlackQueen") && turnCount%2==0){
 			validMove = true;
 		}
@@ -280,12 +316,12 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 					}
 				}
 				else{
-					validMove = false;					
+					validMove = false;
 				}
 			}
 			else{
 				int newY = e.getY()/75;
-				int newX = e.getX()/75;				
+				int newX = e.getX()/75;
 				if((startX-1 >=0)||(startX +1 <=7))
 				{
 					if((piecePresent(e.getX(), (e.getY())))&&((((newX == (startX+1)&&(startX+1<=7)))||((newX == (startX-1))&&(startX-1 >=0)))))
@@ -294,7 +330,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 							validMove = true;
 							if(startY == 6){
 								success = true;
-							}						
+							}
 						}
 						else{
 							validMove = false;
@@ -313,16 +349,16 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 							}
 						}
 						else{
-							validMove = false;	
+							validMove = false;
 						}
 					}
 				}
 				else{
 					validMove = false;
-				}				
-			}			
+				}
+			}
 		}
-		if(!validMove){		
+		if(!validMove){
 			int location=0;
 			if(startY ==0){
 				location = startX;
@@ -330,10 +366,10 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 			else{
 				location  = (startY*8)+startX;
 			}
-			String pieceLocation = pieceName+".png"; 
+			String pieceLocation = pieceName+".png";
 			pieces = new JLabel( new ImageIcon(pieceLocation) );
 			panels = (JPanel)chessBoard.getComponent(location);
-		    panels.add(pieces);			
+		    panels.add(pieces);
 		}
 		else {
 			if (success) {
