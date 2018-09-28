@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5b5c471-28d6-44d3-9ce3-5229a040cebc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlackBishup.png" beforeDir="false" afterPath="$PROJECT_DIR$/BlackBishop.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChessProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChessProject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WhiteBishup.png" beforeDir="false" afterPath="$PROJECT_DIR$/WhiteBishop.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AIChess/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AIChess/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AIChess/BlackBishup.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AIChess/ChessProject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AIChess/ChessProject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AIChess/WhiteBishup.png" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,18 +50,23 @@
     <session id="-1947213190">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.15" value="2" />
+          <entry key="project.open.time.19" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="120" />
+          <entry key="java" value="2841" />
+          <entry key="txt" value="88" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="120" />
+          <entry key="JAVA" value="2841" />
+          <entry key="PLAIN_TEXT" value="88" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -70,8 +82,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ChessProject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="298" column="82" lean-forward="true" selection-start-line="298" selection-start-column="82" selection-end-line="298" selection-end-column="82" />
+            <state relative-caret-position="48">
+              <caret line="381" column="114" lean-forward="true" selection-start-line="381" selection-start-column="114" selection-end-line="381" selection-end-column="114" />
             </state>
           </provider>
         </entry>
@@ -79,6 +91,7 @@
     </leaf>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -94,17 +107,18 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="273" />
-    <option name="y" value="37" />
-    <option name="width" value="1425" />
-    <option name="height" value="990" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1" />
+    <option name="y" value="6" />
+    <option name="width" value="1795" />
+    <option name="height" value="954" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -116,14 +130,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537998255448" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538069191753" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -164,17 +177,36 @@
       <option name="presentableId" value="Default" />
       <updated>1537983111948</updated>
       <workItem from="1537983113357" duration="3553000" />
-      <workItem from="1538036911924" duration="2921000" />
+      <workItem from="1538036911924" duration="4039000" />
+      <workItem from="1538043506015" duration="5701000" />
+      <workItem from="1538059576849" duration="8813000" />
+      <workItem from="1538129172698" duration="1204000" />
     </task>
+    <task id="LOCAL-00001" summary="Fixed broken Knight movements">
+      <created>1538040294569</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1538040294569</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added logic to prevent pieces from leaving the board.">
+      <created>1538041587151</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1538041587151</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6474000" />
+    <option name="totallyTimeSpent" value="23310000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="1" y="5" width="1436" height="763" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1442953" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16351745" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -183,16 +215,16 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.33333334" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37301588" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3990461" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32907802" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32907802" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32776934" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3262519" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -210,11 +242,16 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fixed broken Knight movements" />
+    <MESSAGE value="Added logic to prevent pieces from leaving the board." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added logic to prevent pieces from leaving the board." />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ChessProject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="298" column="82" lean-forward="true" selection-start-line="298" selection-start-column="82" selection-end-line="298" selection-end-column="82" />
+        <state relative-caret-position="48">
+          <caret line="381" column="114" lean-forward="true" selection-start-line="381" selection-start-column="114" selection-end-line="381" selection-end-column="114" />
         </state>
       </provider>
     </entry>
