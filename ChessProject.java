@@ -113,6 +113,18 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     /*
         This method checks if there is a piece present on a particular square.
     */
+    private String returnName(int xPos, int yPos){
+        Component c1 = chessBoard.findComponentAt(xPos, yPos);
+        if (c1 instanceof JLabel) {
+            JLabel awaitingPiece = (JLabel) c1;
+            return awaitingPiece.getIcon().toString();
+        }
+        else if (c1 == null){
+            return "null";
+        }
+        return "";
+    }
+
     private Boolean piecePresent(int x, int y) {
         Component c = chessBoard.findComponentAt(x, y);
         if (c instanceof JPanel) {
@@ -122,15 +134,70 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         }
     }
 
-    /*
-        This is a method to check if a piece is a Black piece.
-    */
+    private Boolean isKingInCheck(int xPos,int yPos, String kingColour){
+        Boolean inCheck = false;
+
+
+
+
+
+        return inCheck;
+    }
+
+    private Boolean horizontalCheck(int xPos, int yPos, String kingColour){
+        Boolean inCheck = false;
+        String pieceName;
+        int newXpos = xPos;
+        int newYpos = yPos;
+
+        for (int i = -75;i<=75;i=i+150){
+            pieceName = "";
+            while (pieceName.isEmpty()){
+                    pieceName = returnName(newXpos,yPos);
+                    newXpos+=i;
+            }
+            System.out.println("Piece "+pieceName);
+            newXpos = xPos;
+
+            pieceName = "";
+            while (pieceName.isEmpty()){
+                pieceName = returnName(xPos,newYpos);
+                newYpos+=i;
+            }
+            System.out.println("Piece "+pieceName);
+            newYpos = yPos;
+        }
+
+
+        return inCheck;
+    }
+
+    private Boolean checkForOpponentKing(String pieceColour, int newX, int newY){
+        Boolean opponentKing = false;
+        for (int i=-75;i<=75;i=i+75){
+            for (int j =-75;j<=75;j=j+75){
+                    if((((newX+i)>0&&(newX+i)<600)) && (((newY+j)>0) && (newY+j)<600)){
+                    if (piecePresent(newX+i, newY+j) && checkOpponent(pieceColour, newX+i,newY+j)){
+                            String tmp1 = returnName(newX+i,newY+j);
+                            if((tmp1.contains("King"))) {
+                                opponentKing = true;
+                        }
+                    }
+                }
+            }
+        }
+        return opponentKing;
+    }
+
     private Boolean checkOpponent(String colour, int newX, int newY) {
         Boolean opponent;
+        String opponentColour = new String();
+        if (colour == "Black") {opponentColour = "White";}
+        else if (colour == "White") {opponentColour = "Black";}
         Component c1 = chessBoard.findComponentAt(newX, newY);
         JLabel awaitingPiece = (JLabel) c1;
         String tmp1 = awaitingPiece.getIcon().toString();
-        if (((tmp1.contains(colour)))) {
+        if (((tmp1.contains(opponentColour)))) {
             opponent = true;
         } else {
             opponent = false;
@@ -174,13 +241,13 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         boolean validMove;
         if (piecePresent(xCoord, yCoord)) {
             if (pieceName.contains("White")) {
-                if (checkOpponent("Black", xCoord, yCoord)) {
+                if (checkOpponent("White", xCoord, yCoord)) {
                     validMove = true;
                 } else {
                     validMove = false;
                 }
             } else {
-                if (checkOpponent("White", xCoord, yCoord)) {
+                if (checkOpponent("Black", xCoord, yCoord)) {
                     validMove = true;
                 } else {
                     validMove = false;
@@ -243,13 +310,11 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         int y = e.getY();
         int xDir = ((landingX - startX) < 0 ? -1 : 1);
         int yDir = ((landingY - startY) < 0 ? -1 : 1);
-        System.out.println("-------------------------------------------------------------------");
-        System.out.println("The piece that is being moved is :" + pieceName);
-        System.out.println("The starting coordinates are : " + "( " + startX + "," + startY + ")");
-        System.out.println("The xMovement is : " + xMovement + " " + xDir);
-        System.out.println("The yMovement is : " + yMovement + " " + yDir);
-        System.out.println("The landing coordinates are : " + "( " + landingX + "," + landingY + ")");
-        System.out.println("-------------------------------------------------------------------");
+        int blackKingXpos = 225;
+        int blackKingYpos = 525;
+        int whiteKingXpos = 225;
+        int whiteKingYpos = 0;
+
 
 		/*
 			The only piece that has been enabled to move is a White Pawn...but we should really have this is a separate
@@ -267,8 +332,20 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         } else {
 
             if(pieceName.contains("King")){
-                if(xMovement==1||yMovement==1||xMovement==1&&yMovement==1){
-                    if(completeMove(x,y,pieceName)){
+                if((xMovement==1&&yMovement==0||yMovement==1&&xMovement==0)||(xMovement==1&&yMovement==1)){
+                    if(checkForOpponentKing(pieceName.substring(0,5),x,y)){
+                        validMove = false;
+                    }
+                    else if(completeMove(x,y,pieceName)){
+                        if(pieceName.contains("Black")){
+                            blackKingXpos = landingX;
+                            blackKingYpos = landingY;
+                        }
+                        else if(pieceName.contains("White")){
+                            whiteKingXpos = landingX;
+                            whiteKingYpos = landingY;
+                        }
+                        Boolean a = horizontalCheck(x,y,"Black");
                         validMove = true;
                     }
                 }
@@ -446,6 +523,13 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                     }
                     chessPiece.setVisible(true);
                 }
+                System.out.println("-------------------------------------------------------------------");
+                System.out.println("The piece that is being moved is :" + pieceName);
+                System.out.println("The starting coordinates are : " + "( " + startX + "," + startY + ")");
+                System.out.println("The xMovement is : " + xMovement + " " + xDir);
+                System.out.println("The yMovement is : " + yMovement + " " + yDir);
+                System.out.println("The landing coordinates are : " + "( " + landingX + "," + landingY + ")");
+                System.out.println("-------------------------------------------------------------------");
                 turnCount++;
                 if (turnCount % 2 == 0) {
                     System.out.println("BLACK PIECES TURN");

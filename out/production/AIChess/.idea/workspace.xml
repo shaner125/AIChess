@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e5b5c471-28d6-44d3-9ce3-5229a040cebc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BlackBishup.png" beforeDir="false" afterPath="$PROJECT_DIR$/BlackBishop.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChessProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChessProject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WhiteBishup.png" beforeDir="false" afterPath="$PROJECT_DIR$/WhiteBishop.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/AIChess/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AIChess/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AIChess/BlackBishup.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AIChess/ChessProject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AIChess/ChessProject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AIChess/WhiteBishup.png" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,6 +12,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/ChessProject$ChessProject.ic" NAME="ChessProject Coverage Results" MODIFIED="1538422801748" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="755063966">
@@ -50,31 +48,42 @@
     <session id="-1947213190">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.15" value="2" />
+          <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.19" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.23" value="1" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="2773" />
-          <entry key="txt" value="88" />
+          <entry key="java" value="3774" />
+          <entry key="txt" value="120" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2773" />
-          <entry key="PLAIN_TEXT" value="88" />
+          <entry key="JAVA" value="3774" />
+          <entry key="PLAIN_TEXT" value="120" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
       <usages-collector id="statistics.spring.boot.run.usages" />
-      <usages-collector id="statistics.file.types.open" />
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="2" />
+        </counts>
+      </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
       <usages-collector id="statistics.spring.boot.mvc.usages" />
-      <usages-collector id="statistics.file.extensions.open" />
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="2" />
+        </counts>
+      </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
@@ -82,8 +91,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ChessProject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="270" column="37" selection-start-line="270" selection-start-column="37" selection-end-line="270" selection-end-column="37" />
+            <state relative-caret-position="-2306">
+              <caret line="132" column="51" selection-start-line="132" selection-start-column="51" selection-end-line="132" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/awt/Component.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-7">
+              <caret line="6532" selection-start-line="6532" selection-end-line="6532" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/javax/swing/JComponent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="3323" selection-start-line="3323" selection-end-line="3323" />
             </state>
           </provider>
         </entry>
@@ -107,18 +134,18 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
-    <option name="y" value="6" />
-    <option name="width" value="1795" />
-    <option name="height" value="954" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="185" />
+    <option name="y" value="130" />
+    <option name="width" value="1438" />
+    <option name="height" value="765" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -130,7 +157,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -180,7 +207,10 @@
       <workItem from="1538036911924" duration="4039000" />
       <workItem from="1538043506015" duration="5701000" />
       <workItem from="1538059576849" duration="8813000" />
-      <workItem from="1538129172698" duration="610000" />
+      <workItem from="1538129172698" duration="1258000" />
+      <workItem from="1538141169399" duration="1209000" />
+      <workItem from="1538402213196" duration="1950000" />
+      <workItem from="1538416161356" duration="7056000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed broken Knight movements">
       <created>1538040294569</created>
@@ -196,17 +226,24 @@
       <option name="project" value="LOCAL" />
       <updated>1538041587151</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Finished bishop, rook and queen.">
+      <created>1538132128279</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1538132128279</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22716000" />
+    <option name="totallyTimeSpent" value="33579000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="5" width="1436" height="763" extended-state="1" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16351745" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12483221" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -215,14 +252,14 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37360892" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3990461" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25248227" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39858156" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32907802" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3280507" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3262519" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -245,13 +282,28 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed broken Knight movements" />
     <MESSAGE value="Added logic to prevent pieces from leaving the board." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added logic to prevent pieces from leaving the board." />
+    <MESSAGE value="Finished bishop, rook and queen." />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished bishop, rook and queen." />
   </component>
   <component name="editorHistoryManager">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/awt/Component.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="6532" selection-start-line="6532" selection-end-line="6532" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/javax/swing/JComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="3323" selection-start-line="3323" selection-end-line="3323" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ChessProject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="270" column="37" selection-start-line="270" selection-start-column="37" selection-end-line="270" selection-end-column="37" />
+        <state relative-caret-position="-2306">
+          <caret line="132" column="51" selection-start-line="132" selection-start-column="51" selection-end-line="132" selection-end-column="51" />
         </state>
       </provider>
     </entry>
