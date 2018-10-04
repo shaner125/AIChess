@@ -134,58 +134,90 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         }
     }
 
-    private Boolean isKingInCheck(int xPos, int yPos, String kingColour) {
+    private Boolean knightCheck(int xPos, int yPos, String opponentColour){
         Boolean inCheck = false;
-        String pieceName;
-        int newXpos = xPos;
-        int newYpos = yPos;
-        String opponentColour = (kingColour.equals("Black")) ? "White" : "Black";
-
-        for (int i = -75; i <= 75; i = i + 150) {
-            pieceName = "";
-            while (pieceName.isEmpty()) {
-                newXpos += i;
-                pieceName = returnName(newXpos, yPos);
-            }
-            if (pieceName.contains(opponentColour + "Rook") || pieceName.contains(opponentColour + "Queen")) {
-                inCheck = true;
-                System.out.println(kingColour + " king would be in check!");
-            }
-            newXpos = xPos;
-
-            pieceName = "";
-            while (pieceName.isEmpty()) {
-                newYpos += i;
-                pieceName = returnName(xPos, newYpos);
-            }
-            if (pieceName.contains(opponentColour + "Rook") || pieceName.contains(opponentColour + "Queen")) {
-                inCheck = true;
-                System.out.println(kingColour + " king would be in check!");
-            }
-            newYpos = yPos;
-
-            for (int j = -75; j <= 75; j = j + 150) {
-                pieceName = "";
-                while (pieceName.isEmpty()) {
-                    newXpos += i;
-                    newYpos += j;
-                    pieceName = returnName(newXpos, newYpos);
-                }
-                if (pieceName.contains(opponentColour + "Pawn") && (j == (kingColour.equals("Black") ? -75 : 75 )) && (Math.abs(newYpos-yPos) == 75)){
+        for(int i = -75; i<=75; i+=150){
+            for(int j=-75;j<=75;j+=150){
+                if(returnName(xPos+i,yPos+(j*2)).contains(opponentColour+"Knight")){
                     inCheck = true;
-                    System.out.println(kingColour + " king would be in check!");
+                    System.out.println("king would be in check!");
+                }
+                else if(returnName(xPos+(i*2),yPos+j).contains(opponentColour+"Knight")){
+                    inCheck = true;
+                    System.out.println("king would be in check!");
+                }
+            }
+
+        }
+        return inCheck;
+    }
+
+    private Boolean straightCheck(int xPos, int yPos, String opponentColour) {
+        Boolean inCheck = false;
+        for (int i = -75; i <= 75; i += 150) {
+            int newXPos = xPos;
+            int newYPos = yPos;
+
+            //horizontal check
+            String pieceName = "";
+            while (pieceName.isEmpty()) {
+                newXPos += i;
+                pieceName = returnName(newXPos, yPos);
+            }
+            if (pieceName.contains(opponentColour + "Rook") || pieceName.contains(opponentColour + "Queen")) {
+                inCheck = true;
+                System.out.println("King would be in check!");
+            }
+            //Vertical check
+            pieceName = "";
+            while (pieceName.isEmpty()) {
+                newYPos += i;
+                pieceName = returnName(xPos, newYPos);
+            }
+            if (pieceName.contains(opponentColour + "Rook") || pieceName.contains(opponentColour + "Queen")) {
+                inCheck = true;
+                System.out.println("King would be in check!");
+            }
+        }
+        return inCheck;
+    }
+
+    private Boolean diagonalCheck(int xPos, int yPos, String opponentColour){
+        Boolean inCheck = false;
+        int newYPos = yPos;
+        int newXPos = xPos;
+        for (int i = -75; i <= 75; i +=150) {
+            for (int j = -75; j <= 75; j +=150) {
+                String pieceName = "";
+                while (pieceName.isEmpty()) {
+                    newXPos += i;
+                    newYPos += j;
+                    pieceName = returnName(newXPos, newYPos);
+                }
+                if (pieceName.contains(opponentColour + "Pawn") && (j == (opponentColour.equals("White") ? -75 : 75 )) && (Math.abs(newYPos-yPos) == 75)){
+                    inCheck = true;
+                    System.out.println("king would be in check!");
                 }
 
                 else if (pieceName.contains(opponentColour + "Bishop") || pieceName.contains(opponentColour + "Queen")) {
                     inCheck = true;
-                    System.out.println(kingColour + " king would be in check!");
+                    System.out.println("king would be in check!");
                 }
-                newYpos = yPos;
-                newXpos = xPos;
+                newYPos = yPos;
+                newXPos = xPos;
             }
         }
 
 
+        return inCheck;
+    }
+
+    private Boolean isKingInCheck(int xPos, int yPos, String kingColour) {
+        Boolean inCheck = false;
+        String opponentColour = (kingColour.equals("Black")) ? "White" : "Black";
+        if(knightCheck(xPos,yPos,opponentColour) || straightCheck(xPos,yPos,opponentColour) || diagonalCheck(xPos,yPos,opponentColour)){
+            inCheck = true;
+        }
         return inCheck;
     }
 
@@ -249,10 +281,10 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         return isClear;
     }
 
-    public boolean completeMove(int xCoord, int yCoord, String pieceColour) {
+    public boolean completeMove(int xPos, int yPos, String pieceColour) {
         boolean validMove;
-        if (piecePresent(xCoord, yCoord)) {
-            if (checkOpponent(pieceColour, xCoord, yCoord)) {
+        if (piecePresent(xPos, yPos)) {
+            if (checkOpponent(pieceColour, xPos, yPos)) {
                 validMove = true;
             } else {
                 validMove = false;
