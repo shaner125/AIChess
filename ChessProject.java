@@ -110,21 +110,21 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         panels.add(pieces);
     }
 
-    /*
-        This method checks if there is a piece present on a particular square.
-    */
-    private String returnName(int xPos, int yPos){
+    //This method returns the name of the piece on a particular square, if one is present.
+    private String returnName(int xPos, int yPos) {
         Component c1 = chessBoard.findComponentAt(xPos, yPos);
         if (c1 instanceof JLabel) {
             JLabel awaitingPiece = (JLabel) c1;
             return awaitingPiece.getIcon().toString();
-        }
-        else if (c1 == null){
+        } else if (c1 == null) {
             return "null";
         }
         return "";
     }
 
+    /*
+        This method checks if there is a piece present on a particular square.
+    */
     private Boolean piecePresent(int x, int y) {
         Component c = chessBoard.findComponentAt(x, y);
         if (c instanceof JPanel) {
@@ -134,46 +134,51 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         }
     }
 
-    private Boolean isKingInCheck(int xPos, int yPos, String kingColour){
+    private Boolean isKingInCheck(int xPos, int yPos, String kingColour) {
         Boolean inCheck = false;
         String pieceName;
         int newXpos = xPos;
         int newYpos = yPos;
         String opponentColour = (kingColour.equals("Black")) ? "White" : "Black";
 
-        for (int i = -75;i<=75;i=i+150){
+        for (int i = -75; i <= 75; i = i + 150) {
             pieceName = "";
-            while (pieceName.isEmpty()){
-                    pieceName = returnName(newXpos,yPos);
-                    newXpos+=i;
+            while (pieceName.isEmpty()) {
+                newXpos += i;
+                pieceName = returnName(newXpos, yPos);
             }
-            if (pieceName.contains(opponentColour+"Rook") || pieceName.contains(opponentColour+"Queen")){
+            if (pieceName.contains(opponentColour + "Rook") || pieceName.contains(opponentColour + "Queen")) {
                 inCheck = true;
-                System.out.println(kingColour+" king would be in check!");
+                System.out.println(kingColour + " king would be in check!");
             }
             newXpos = xPos;
 
             pieceName = "";
-            while (pieceName.isEmpty()){
-                pieceName = returnName(xPos,newYpos);
-                newYpos+=i;
+            while (pieceName.isEmpty()) {
+                newYpos += i;
+                pieceName = returnName(xPos, newYpos);
             }
-            if (pieceName.contains(opponentColour+"Rook") || pieceName.contains(opponentColour+"Queen")){
+            if (pieceName.contains(opponentColour + "Rook") || pieceName.contains(opponentColour + "Queen")) {
                 inCheck = true;
-                System.out.println(kingColour+" king would be in check!");
+                System.out.println(kingColour + " king would be in check!");
             }
             newYpos = yPos;
 
-            for (int j = -75;j<=75;j=j+150){
+            for (int j = -75; j <= 75; j = j + 150) {
                 pieceName = "";
-                while (pieceName.isEmpty()){
-                    pieceName = returnName(newXpos,newYpos);
-                    newXpos+=i;
-                    newYpos+=j;
+                while (pieceName.isEmpty()) {
+                    newXpos += i;
+                    newYpos += j;
+                    pieceName = returnName(newXpos, newYpos);
                 }
-                if (pieceName.contains(opponentColour+"Bishop") || pieceName.contains(opponentColour+"Queen")){
+                if (pieceName.contains(opponentColour + "Pawn") && (j == (kingColour.equals("Black") ? -75 : 75 )) && (Math.abs(newYpos-yPos) == 75)){
                     inCheck = true;
-                    System.out.println(kingColour+" king would be in check!");
+                    System.out.println(kingColour + " king would be in check!");
+                }
+
+                else if (pieceName.contains(opponentColour + "Bishop") || pieceName.contains(opponentColour + "Queen")) {
+                    inCheck = true;
+                    System.out.println(kingColour + " king would be in check!");
                 }
                 newYpos = yPos;
                 newXpos = xPos;
@@ -184,15 +189,15 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         return inCheck;
     }
 
-    private Boolean checkForOpponentKing(String pieceColour, int newX, int newY){
+    private Boolean checkForOpponentKing(String pieceColour, int newX, int newY) {
         Boolean opponentKing = false;
-        for (int i=-75;i<=75;i=i+75){
-            for (int j =-75;j<=75;j=j+75){
-                    if((((newX+i)>0&&(newX+i)<600)) && (((newY+j)>0) && (newY+j)<600)){
-                    if (piecePresent(newX+i, newY+j) && checkOpponent(pieceColour, newX+i,newY+j)){
-                            String tmp1 = returnName(newX+i,newY+j);
-                            if((tmp1.contains("King"))) {
-                                opponentKing = true;
+        for (int i = -75; i <= 75; i = i + 75) {
+            for (int j = -75; j <= 75; j = j + 75) {
+                if ((((newX + i) > 0 && (newX + i) < 600)) && (((newY + j) > 0) && (newY + j) < 600)) {
+                    if (piecePresent(newX + i, newY + j) && checkOpponent(pieceColour, newX + i, newY + j)) {
+                        String tmp1 = returnName(newX + i, newY + j);
+                        if ((tmp1.contains("King"))) {
+                            opponentKing = true;
                         }
                     }
                 }
@@ -204,7 +209,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     private Boolean checkOpponent(String colour, int newX, int newY) {
         Boolean opponent;
         String opponentColour = (colour.equals("Black")) ? "White" : "Black";
-        if (opponentColour.equals(returnName(newX,newY).substring(0,5))) {
+        if (opponentColour.equals(returnName(newX, newY).substring(0, 5))) {
             opponent = true;
         } else {
             opponent = false;
@@ -247,13 +252,12 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     public boolean completeMove(int xCoord, int yCoord, String pieceColour) {
         boolean validMove;
         if (piecePresent(xCoord, yCoord)) {
-                if (checkOpponent(pieceColour, xCoord, yCoord)) {
-                    validMove = true;
-                } else {
-                    validMove = false;
-                }
+            if (checkOpponent(pieceColour, xCoord, yCoord)) {
+                validMove = true;
+            } else {
+                validMove = false;
             }
-        else {
+        } else {
             validMove = true;
         }
         return validMove;
@@ -309,7 +313,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         int y = e.getY();
         int xDir = ((landingX - startX) < 0 ? -1 : 1);
         int yDir = ((landingY - startY) < 0 ? -1 : 1);
-        String currentColour = pieceName.substring(0,5);
+        String currentColour = pieceName.substring(0, 5);
 		/*
 			The only piece that has been enabled to move is a White Pawn...but we should really have this is a separate
 			method somewhere...how would this work.
@@ -323,26 +327,23 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 		*/
         if (((landingX < 0) || (landingX > 7)) || ((landingY < 0) || landingY > 7)) {
             validMove = false;
-        }
+        } else {
 
-        else {
-
-            if(pieceName.contains("King")) {
+            if (pieceName.contains("King")) {
                 if ((xMovement == 1 && yMovement == 0 || yMovement == 1 && xMovement == 0) || (xMovement == 1 && yMovement == 1)) {
-                    if (checkForOpponentKing(currentColour, x, y) || isKingInCheck(x,y, currentColour)) {
+                    if (checkForOpponentKing(currentColour, x, y) || isKingInCheck(x, y, currentColour)) {
                         validMove = false;
-                    }
-                    else if (completeMove(x, y, currentColour)) {
+                    } else if (completeMove(x, y, currentColour)) {
                         validMove = true;
                     }
                 }
             }
 
 
-            if(pieceName.contains("Queen")){
-                if(xMovement == yMovement || xMovement > 0 && yMovement == 0 || xMovement == 0 && yMovement > 0) {
-                    if(checkPathIsClear(xMovement,yMovement,initialX,initialY,x,y)){
-                        if(completeMove(x,y,currentColour)){
+            if (pieceName.contains("Queen")) {
+                if (xMovement == yMovement || xMovement > 0 && yMovement == 0 || xMovement == 0 && yMovement > 0) {
+                    if (checkPathIsClear(xMovement, yMovement, initialX, initialY, x, y)) {
+                        if (completeMove(x, y, currentColour)) {
                             validMove = true;
                         }
                     }
@@ -390,7 +391,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                                 validMove = true;
                             }
                         }
-                    } else if ((yMovement == 1) && (startY > landingY) && (xMovement == 1) && piecePresent(x,y)) {
+                    } else if ((yMovement == 1) && (startY > landingY) && (xMovement == 1) && piecePresent(x, y)) {
                         if (completeMove(x, y, currentColour)) {
                             validMove = true;
                         }
@@ -404,7 +405,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                                 success = true;
                             }
                         }
-                    } else if ((yMovement == 1) && (startY > landingY) && (xMovement == 1) && piecePresent(x,y)) {
+                    } else if ((yMovement == 1) && (startY > landingY) && (xMovement == 1) && piecePresent(x, y)) {
                         if (completeMove(x, y, currentColour)) {
                             validMove = true;
                         }
@@ -429,7 +430,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                                 validMove = true;
                             }
                         }
-                    } else if ((yMovement == 1) && (startY < landingY) && (xMovement == 1) && piecePresent(x,y)) {
+                    } else if ((yMovement == 1) && (startY < landingY) && (xMovement == 1) && piecePresent(x, y)) {
                         if (completeMove(x, y, currentColour)) {
                             validMove = true;
                         }
@@ -442,7 +443,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                                 success = true;
                             }
                         }
-                    } else if ((yMovement == 1) && (startY < landingY) && (xMovement == 1) && piecePresent(x,y)) {
+                    } else if ((yMovement == 1) && (startY < landingY) && (xMovement == 1) && piecePresent(x, y)) {
                         if (completeMove(x, y, currentColour)) {
                             validMove = true;
                             if (landingY == 7) {
@@ -453,77 +454,77 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                 }
             }
         }
-            if (!validMove) {
-                int location = 0;
-                if (startY == 0) {
-                    location = startX;
-                } else {
-                    location = (startY * 8) + startX;
-                }
-                String pieceLocation = pieceName + ".png";
-                pieces = new JLabel(new ImageIcon(pieceLocation));
-                panels = (JPanel) chessBoard.getComponent(location);
-                panels.add(pieces);
+        if (!validMove) {
+            int location = 0;
+            if (startY == 0) {
+                location = startX;
             } else {
-                if (success) {
-                    Component c1 = chessBoard.findComponentAt(x, y);
-                    JLabel awaitingPiece = (JLabel) c1;
-                    String tmp1 = awaitingPiece.getIcon().toString();
-                    if (tmp1.contains("Black")) {
-                        int location = 56 + (e.getX() / 75);
-                        if (c instanceof JLabel) {
-                            Container parent = c.getParent();
-                            parent.remove(0);
-                            pieces = new JLabel(new ImageIcon("WhiteQueen.png"));
-                            parent = (JPanel) chessBoard.getComponent(location);
-                            parent.add(pieces);
-                        } else {
-                            Container parent = (Container) c;
-                            pieces = new JLabel(new ImageIcon("WhiteQueen.png"));
-                            parent = (JPanel) chessBoard.getComponent(location);
-                            parent.add(pieces);
-                        }
-                    } else if (((tmp1.contains("White")))) {
-                        int location = 0 + (e.getX() / 75);
-                        if (c instanceof JLabel) {
-                            Container parent = c.getParent();
-                            parent.remove(0);
-                            pieces = new JLabel(new ImageIcon("BlackQueen.png"));
-                            parent = (JPanel) chessBoard.getComponent(location);
-                            parent.add(pieces);
-                        } else {
-                            Container parent = (Container) c;
-                            pieces = new JLabel(new ImageIcon("BlackQueen.png"));
-                            parent = (JPanel) chessBoard.getComponent(location);
-                            parent.add(pieces);
-                        }
-                    }
-                } else {
+                location = (startY * 8) + startX;
+            }
+            String pieceLocation = pieceName + ".png";
+            pieces = new JLabel(new ImageIcon(pieceLocation));
+            panels = (JPanel) chessBoard.getComponent(location);
+            panels.add(pieces);
+        } else {
+            if (success) {
+                Component c1 = chessBoard.findComponentAt(x, y);
+                JLabel awaitingPiece = (JLabel) c1;
+                String tmp1 = awaitingPiece.getIcon().toString();
+                if (tmp1.contains("Black")) {
+                    int location = 56 + (e.getX() / 75);
                     if (c instanceof JLabel) {
                         Container parent = c.getParent();
                         parent.remove(0);
-                        parent.add(chessPiece);
+                        pieces = new JLabel(new ImageIcon("WhiteQueen.png"));
+                        parent = (JPanel) chessBoard.getComponent(location);
+                        parent.add(pieces);
                     } else {
                         Container parent = (Container) c;
-                        parent.add(chessPiece);
+                        pieces = new JLabel(new ImageIcon("WhiteQueen.png"));
+                        parent = (JPanel) chessBoard.getComponent(location);
+                        parent.add(pieces);
                     }
-                    chessPiece.setVisible(true);
+                } else if (((tmp1.contains("White")))) {
+                    int location = 0 + (e.getX() / 75);
+                    if (c instanceof JLabel) {
+                        Container parent = c.getParent();
+                        parent.remove(0);
+                        pieces = new JLabel(new ImageIcon("BlackQueen.png"));
+                        parent = (JPanel) chessBoard.getComponent(location);
+                        parent.add(pieces);
+                    } else {
+                        Container parent = (Container) c;
+                        pieces = new JLabel(new ImageIcon("BlackQueen.png"));
+                        parent = (JPanel) chessBoard.getComponent(location);
+                        parent.add(pieces);
+                    }
                 }
-                System.out.println("-------------------------------------------------------------------");
-                System.out.println("The piece that is being moved is :" + pieceName);
-                System.out.println("The starting coordinates are : " + "( " + startX + "," + startY + ")");
-                System.out.println("The xMovement is : " + xMovement + " " + xDir);
-                System.out.println("The yMovement is : " + yMovement + " " + yDir);
-                System.out.println("The landing coordinates are : " + "( " + landingX + "," + landingY + ")");
-                System.out.println("-------------------------------------------------------------------");
-                turnCount++;
-                if (turnCount % 2 == 0) {
-                    System.out.println("BLACK PIECES TURN");
+            } else {
+                if (c instanceof JLabel) {
+                    Container parent = c.getParent();
+                    parent.remove(0);
+                    parent.add(chessPiece);
                 } else {
-                    System.out.println("WHITE PIECES TURN");
+                    Container parent = (Container) c;
+                    parent.add(chessPiece);
                 }
-
+                chessPiece.setVisible(true);
             }
+            System.out.println("-------------------------------------------------------------------");
+            System.out.println("The piece that is being moved is :" + pieceName);
+            System.out.println("The starting coordinates are : " + "( " + startX + "," + startY + ")");
+            System.out.println("The xMovement is : " + xMovement + " " + xDir);
+            System.out.println("The yMovement is : " + yMovement + " " + yDir);
+            System.out.println("The landing coordinates are : " + "( " + landingX + "," + landingY + ")");
+            System.out.println("-------------------------------------------------------------------");
+            turnCount++;
+            if (turnCount % 2 == 0) {
+                System.out.println("BLACK PIECES TURN");
+            } else {
+                System.out.println("WHITE PIECES TURN");
+            }
+
+        }
 
     }
 
