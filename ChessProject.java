@@ -21,6 +21,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     JLabel pieces;
     int turnCount = 1;
 
+
     public ChessProject() {
         Dimension boardSize = new Dimension(600, 600);
 
@@ -212,9 +213,8 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         return inCheck;
     }
 
-    private Boolean isKingInCheck(int xPos, int yPos, String kingColour) {
+    private Boolean isKingInCheck(int xPos, int yPos, String kingColour, String opponentColour) {
         Boolean inCheck = false;
-        String opponentColour = (kingColour.equals("Black")) ? "White" : "Black";
         if(knightCheck(xPos,yPos,opponentColour) || straightCheck(xPos,yPos,opponentColour) || diagonalCheck(xPos,yPos,opponentColour)){
             inCheck = true;
         }
@@ -285,7 +285,13 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         boolean validMove;
         if (piecePresent(xPos, yPos)) {
             if (checkOpponent(pieceColour, xPos, yPos)) {
-                validMove = true;
+                if(returnName(xPos,yPos).contains("King")) {
+                    checkmate(pieceColour);
+                    validMove = true;
+                }
+                else{
+                    validMove = true;
+                }
             } else {
                 validMove = false;
             }
@@ -293,6 +299,11 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
             validMove = true;
         }
         return validMove;
+    }
+
+    public void checkmate(String winner){
+        JOptionPane.showMessageDialog(null,winner+" has won the game!");
+        System.exit(1);
     }
 
     /*
@@ -343,27 +354,19 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         int yMovement = Math.abs((e.getY() / 75) - startY);
         int x = e.getX();
         int y = e.getY();
-        int xDir = ((landingX - startX) < 0 ? -1 : 1);
-        int yDir = ((landingY - startY) < 0 ? -1 : 1);
         String currentColour = pieceName.substring(0, 5);
-		/*
-			The only piece that has been enabled to move is a White Pawn...but we should really have this is a separate
-			method somewhere...how would this work.
-			
-			So a Pawn is able to move two squares forward one its first go but only one square after that. 
-			The Pawn is the only piece that cannot move backwards in chess...so be careful when committing 
-			a pawn forward. A Pawn is able to take any of the opponent’s pieces but they have to be one 
-			square forward and one square over, i.e. in a diagonal direction from the Pawns original position. 
-			If a Pawn makes it to the top of the other side, the Pawn can turn into any other piece, for 
-			demonstration purposes the Pawn here turns into a Queen.
-		*/
-        if (((landingX < 0) || (landingX > 7)) || ((landingY < 0) || landingY > 7)) {
+        String opponentColour = (currentColour.equals("Black")) ? "White" : "Black";
+        String currentTurn = (turnCount%2==0) ? "Black" : "White";
+
+
+
+        if ((((landingX < 0) || (landingX > 7)) || ((landingY < 0) || landingY > 7)) || !pieceName.contains(currentTurn)) {
             validMove = false;
         } else {
 
             if (pieceName.contains("King")) {
                 if ((xMovement == 1 && yMovement == 0 || yMovement == 1 && xMovement == 0) || (xMovement == 1 && yMovement == 1)) {
-                    if (checkForOpponentKing(currentColour, x, y) || isKingInCheck(x, y, currentColour)) {
+                    if (checkForOpponentKing(currentColour, x, y) || isKingInCheck(x, y, currentColour, opponentColour)) {
                         validMove = false;
                     } else if (completeMove(x, y, currentColour)) {
                         validMove = true;
@@ -411,7 +414,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                 }
             }
 
-            if (pieceName.equals("BlackPawn")) {//&& turnCount%2==0){
+            if (pieceName.equals("BlackPawn")) {
                 if (startY == 6) {
                     if (((yMovement == 1) || (yMovement == 2)) && (startY > landingY) && (xMovement == 0)) {
                         if (yMovement == 2) {
@@ -450,7 +453,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                 }
             }
 
-            if (pieceName.equals("WhitePawn")) {//&& turnCount%2==0){
+            if (pieceName.equals("WhitePawn")) {
                 if (startY == 1) {
                     if (((yMovement == 1) || (yMovement == 2)) && (startY < landingY) && (xMovement == 0)) {
                         if (yMovement == 2) {
@@ -542,20 +545,16 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                 }
                 chessPiece.setVisible(true);
             }
+            turnCount++;
+            currentTurn = (turnCount%2==0?"Black":"White");
             System.out.println("-------------------------------------------------------------------");
             System.out.println("The piece that is being moved is :" + pieceName);
             System.out.println("The starting coordinates are : " + "( " + startX + "," + startY + ")");
-            System.out.println("The xMovement is : " + xMovement + " " + xDir);
-            System.out.println("The yMovement is : " + yMovement + " " + yDir);
+            System.out.println("The xMovement is : " + xMovement);
+            System.out.println("The yMovement is : " + yMovement);
             System.out.println("The landing coordinates are : " + "( " + landingX + "," + landingY + ")");
             System.out.println("-------------------------------------------------------------------");
-            turnCount++;
-            if (turnCount % 2 == 0) {
-                System.out.println("BLACK PIECES TURN");
-            } else {
-                System.out.println("WHITE PIECES TURN");
-            }
-
+            System.out.println(currentTurn+" pieces turn to move.");
         }
 
     }
@@ -585,6 +584,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        System.out.println("Let the chess begin! White piece gets first move");
     }
 }
 

@@ -4,6 +4,7 @@
     <list default="true" id="e5b5c471-28d6-44d3-9ce3-5229a040cebc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChessProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChessProject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AIChess/ChessProject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AIChess/ChessProject.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -59,14 +60,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="7151" />
-          <entry key="txt" value="162" />
+          <entry key="java" value="7810" />
+          <entry key="txt" value="242" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="7151" />
-          <entry key="PLAIN_TEXT" value="162" />
+          <entry key="JAVA" value="7810" />
+          <entry key="PLAIN_TEXT" value="242" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -92,8 +93,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ChessProject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1074">
-              <caret line="217" column="9" selection-start-line="217" selection-start-column="9" selection-end-line="217" selection-end-column="9" />
+            <state relative-caret-position="316">
+              <caret line="554" column="104" selection-start-line="554" selection-start-column="104" selection-end-line="554" selection-end-column="104" />
             </state>
           </provider>
         </entry>
@@ -117,6 +118,11 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>turn</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="MERGE" />
@@ -164,7 +170,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538676503598" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538678860869" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -243,11 +249,18 @@
       <option name="project" value="LOCAL" />
       <updated>1538658544374</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Refactored isKingInCheck method, broke into sub-methods, cleaned up code.">
+      <created>1538676605926</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1538676605926</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63343000" />
+    <option name="totallyTimeSpent" value="65718000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -294,7 +307,8 @@
     <MESSAGE value="Added logic to prevent pieces from leaving the board." />
     <MESSAGE value="Finished bishop, rook and queen." />
     <MESSAGE value="Fixed King movement and check for pawns." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed King movement and check for pawns." />
+    <MESSAGE value="Refactored isKingInCheck method, broke into sub-methods, cleaned up code." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored isKingInCheck method, broke into sub-methods, cleaned up code." />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/awt/Component.java">
@@ -314,8 +328,8 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/jre/lib/rt.jar!/sun/misc/Unsafe.class" />
     <entry file="file://$PROJECT_DIR$/ChessProject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1074">
-          <caret line="217" column="9" selection-start-line="217" selection-start-column="9" selection-end-line="217" selection-end-column="9" />
+        <state relative-caret-position="316">
+          <caret line="554" column="104" selection-start-line="554" selection-start-column="104" selection-end-line="554" selection-end-column="104" />
         </state>
       </provider>
     </entry>
