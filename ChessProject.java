@@ -135,26 +135,26 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         }
     }
 
+    //Checks for attacking Knights
     private Boolean knightCheck(int xPos, int yPos, String opponentColour){
-        Boolean inCheck = false;
         for(int i = -75; i<=75; i+=150){
             for(int j=-75;j<=75;j+=150){
                 if(returnName(xPos+i,yPos+(j*2)).contains(opponentColour+"Knight")){
-                    inCheck = true;
                     System.out.println("king would be in check!");
+                    return true;
                 }
                 else if(returnName(xPos+(i*2),yPos+j).contains(opponentColour+"Knight")){
-                    inCheck = true;
                     System.out.println("king would be in check!");
+                    return true;
                 }
             }
 
         }
-        return inCheck;
+        return false;
     }
 
+    //Checks for Attacking pieces on vertical and horizontal planes.
     private Boolean straightCheck(int xPos, int yPos, String opponentColour) {
-        Boolean inCheck = false;
         for (int i = -75; i <= 75; i += 150) {
             int newXPos = xPos;
             int newYPos = yPos;
@@ -166,8 +166,8 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                 pieceName = returnName(newXPos, yPos);
             }
             if (pieceName.contains(opponentColour + "Rook") || pieceName.contains(opponentColour + "Queen")) {
-                inCheck = true;
                 System.out.println("King would be in check!");
+                return true;
             }
             //Vertical check
             pieceName = "";
@@ -176,15 +176,15 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                 pieceName = returnName(xPos, newYPos);
             }
             if (pieceName.contains(opponentColour + "Rook") || pieceName.contains(opponentColour + "Queen")) {
-                inCheck = true;
                 System.out.println("King would be in check!");
+                return true;
             }
         }
-        return inCheck;
+        return false;
     }
 
+    //Checks for diagonally attacking pieces.
     private Boolean diagonalCheck(int xPos, int yPos, String opponentColour){
-        Boolean inCheck = false;
         int newYPos = yPos;
         int newXPos = xPos;
         for (int i = -75; i <= 75; i +=150) {
@@ -196,13 +196,13 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                     pieceName = returnName(newXPos, newYPos);
                 }
                 if (pieceName.contains(opponentColour + "Pawn") && (j == (opponentColour.equals("White") ? -75 : 75 )) && (Math.abs(newYPos-yPos) == 75)){
-                    inCheck = true;
                     System.out.println("king would be in check!");
+                    return true;
                 }
 
                 else if (pieceName.contains(opponentColour + "Bishop") || pieceName.contains(opponentColour + "Queen")) {
-                    inCheck = true;
                     System.out.println("king would be in check!");
+                    return true;
                 }
                 newYPos = yPos;
                 newXPos = xPos;
@@ -210,47 +210,40 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         }
 
 
-        return inCheck;
+        return false;
     }
 
+    //Executes methods to assess whether king is in check.
     private Boolean isKingInCheck(int xPos, int yPos, String kingColour, String opponentColour) {
-        Boolean inCheck = false;
         if(knightCheck(xPos,yPos,opponentColour) || straightCheck(xPos,yPos,opponentColour) || diagonalCheck(xPos,yPos,opponentColour)){
-            inCheck = true;
+            return true;
         }
-        return inCheck;
+        return false;
     }
 
-    private Boolean checkForOpponentKing(String pieceColour, int newX, int newY) {
-        Boolean opponentKing = false;
+    //Checks whether there is an opposing adjacent king where your king is moving.
+    private Boolean checkForOpponentKing(String opponentColour, int newX, int newY) {
         for (int i = -75; i <= 75; i = i + 75) {
             for (int j = -75; j <= 75; j = j + 75) {
-                if ((((newX + i) > 0 && (newX + i) < 600)) && (((newY + j) > 0) && (newY + j) < 600)) {
-                    if (piecePresent(newX + i, newY + j) && checkOpponent(pieceColour, newX + i, newY + j)) {
-                        String tmp1 = returnName(newX + i, newY + j);
-                        if ((tmp1.contains("King"))) {
-                            opponentKing = true;
-                        }
-                    }
+                if (returnName(newX + i, newY + j).contains(opponentColour + "King")) {
+                    return true;
                 }
             }
         }
-        return opponentKing;
+        return false;
     }
 
+    //Checks whether a piece is an opponent
     private Boolean checkOpponent(String colour, int newX, int newY) {
-        Boolean opponent;
         String opponentColour = (colour.equals("Black")) ? "White" : "Black";
         if (opponentColour.equals(returnName(newX, newY).substring(0, 5))) {
-            opponent = true;
-        } else {
-            opponent = false;
+            return true;
         }
-        return opponent;
+        return false;
     }
 
+    //Checks whether path is clear between two points on board.
     public boolean checkPathIsClear(int xMovement, int yMovement, int startX, int startY, int landingX, int landingY) {
-        boolean isClear = true;
 
         int XDirection = ((landingX - startX) < 0 ? -75 : 75);
         int YDirection = ((landingY - startY) < 0 ? -75 : 75);
@@ -258,7 +251,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         if (xMovement == yMovement) {
             for (int i = 0; i < xMovement; i++) {
                 if (piecePresent(startX, startY)) {
-                    isClear = false;
+                    return false;
                 }
                 startX = startX + XDirection;
                 startY = startY + YDirection;
@@ -266,39 +259,38 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         } else if (xMovement > 0 && yMovement == 0) {
             for (int i = 0; i < xMovement; i++) {
                 if (piecePresent(startX, startY)) {
-                    isClear = false;
+                    return false;
                 }
                 startX = startX + XDirection;
             }
         } else if (xMovement == 0 && yMovement > 0) {
             for (int i = 0; i < yMovement; i++) {
                 if (piecePresent(startX, startY)) {
-                    isClear = false;
+                    return false;
                 }
                 startY = startY + YDirection;
             }
         }
-        return isClear;
+        return true;
     }
 
+    //method that calls all the other methods verifying a move is valid.
     public boolean completeMove(int xPos, int yPos, String pieceColour) {
-        boolean validMove;
         if (piecePresent(xPos, yPos)) {
             if (checkOpponent(pieceColour, xPos, yPos)) {
                 if(returnName(xPos,yPos).contains("King")) {
                     checkmate(pieceColour);
-                    validMove = true;
                 }
                 else{
-                    validMove = true;
+                    return true;
                 }
             } else {
-                validMove = false;
+                return false;
             }
         } else {
-            validMove = true;
+            return true;
         }
-        return validMove;
+        return false;
     }
 
     public void checkmate(String winner){
@@ -366,7 +358,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 
             if (pieceName.contains("King")) {
                 if ((xMovement == 1 && yMovement == 0 || yMovement == 1 && xMovement == 0) || (xMovement == 1 && yMovement == 1)) {
-                    if (checkForOpponentKing(currentColour, x, y) || isKingInCheck(x, y, currentColour, opponentColour)) {
+                    if (checkForOpponentKing(opponentColour, x, y) || isKingInCheck(x, y, currentColour, opponentColour)) {
                         validMove = false;
                     } else if (completeMove(x, y, currentColour)) {
                         validMove = true;
