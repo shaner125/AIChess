@@ -136,14 +136,13 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     }
 
     //Checks for attacking Knights
-    private Boolean knightCheck(int xPos, int yPos, String opponentColour){
-        for(int i = -75; i<=75; i+=150){
-            for(int j=-75;j<=75;j+=150){
-                if(returnName(xPos+i,yPos+(j*2)).contains(opponentColour+"Knight")){
+    private Boolean knightCheck(int xPos, int yPos, String opponentColour) {
+        for (int i = -75; i <= 75; i += 150) {
+            for (int j = -75; j <= 75; j += 150) {
+                if (returnName(xPos + i, yPos + (j * 2)).contains(opponentColour + "Knight")) {
                     System.out.println("king would be in check!");
                     return true;
-                }
-                else if(returnName(xPos+(i*2),yPos+j).contains(opponentColour+"Knight")){
+                } else if (returnName(xPos + (i * 2), yPos + j).contains(opponentColour + "Knight")) {
                     System.out.println("king would be in check!");
                     return true;
                 }
@@ -184,23 +183,21 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     }
 
     //Checks for diagonally attacking pieces.
-    private Boolean diagonalCheck(int xPos, int yPos, String opponentColour){
+    private Boolean diagonalCheck(int xPos, int yPos, String opponentColour) {
         int newYPos = yPos;
         int newXPos = xPos;
-        for (int i = -75; i <= 75; i +=150) {
-            for (int j = -75; j <= 75; j +=150) {
+        for (int i = -75; i <= 75; i += 150) {
+            for (int j = -75; j <= 75; j += 150) {
                 String pieceName = "";
                 while (pieceName.isEmpty()) {
                     newXPos += i;
                     newYPos += j;
                     pieceName = returnName(newXPos, newYPos);
                 }
-                if (pieceName.contains(opponentColour + "Pawn") && (j == (opponentColour.equals("White") ? -75 : 75 )) && (Math.abs(newYPos-yPos) == 75)){
+                if (pieceName.contains(opponentColour + "Pawn") && (j == (opponentColour.equals("White") ? -75 : 75)) && (Math.abs(newYPos - yPos) == 75)) {
                     System.out.println("king would be in check!");
                     return true;
-                }
-
-                else if (pieceName.contains(opponentColour + "Bishop") || pieceName.contains(opponentColour + "Queen")) {
+                } else if (pieceName.contains(opponentColour + "Bishop") || pieceName.contains(opponentColour + "Queen")) {
                     System.out.println("king would be in check!");
                     return true;
                 }
@@ -214,8 +211,8 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     }
 
     //Executes methods to assess whether king is in check.
-    private Boolean isKingInCheck(int xPos, int yPos, String kingColour, String opponentColour) {
-        if(knightCheck(xPos,yPos,opponentColour) || straightCheck(xPos,yPos,opponentColour) || diagonalCheck(xPos,yPos,opponentColour)){
+    private Boolean isKingInCheck(int xPos, int yPos, String opponentColour) {
+        if (knightCheck(xPos, yPos, opponentColour) || straightCheck(xPos, yPos, opponentColour) || diagonalCheck(xPos, yPos, opponentColour)) {
             return true;
         }
         return false;
@@ -278,10 +275,9 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     public boolean completeMove(int xPos, int yPos, String pieceColour) {
         if (piecePresent(xPos, yPos)) {
             if (checkOpponent(pieceColour, xPos, yPos)) {
-                if(returnName(xPos,yPos).contains("King")) {
+                if (returnName(xPos, yPos).contains("King")) {
                     checkmate(pieceColour);
-                }
-                else{
+                } else {
                     return true;
                 }
             } else {
@@ -293,8 +289,8 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         return false;
     }
 
-    public void checkmate(String winner){
-        JOptionPane.showMessageDialog(null,winner+" has won the game!");
+    public void checkmate(String winner) {
+        JOptionPane.showMessageDialog(null, winner + " has won the game!");
         System.exit(1);
     }
 
@@ -348,8 +344,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         int y = e.getY();
         String currentColour = pieceName.substring(0, 5);
         String opponentColour = (currentColour.equals("Black")) ? "White" : "Black";
-        String currentTurn = (turnCount%2==0) ? "Black" : "White";
-
+        String currentTurn = (turnCount % 2 == 0) ? "Black" : "White";
 
 
         if ((((landingX < 0) || (landingX > 7)) || ((landingY < 0) || landingY > 7)) || !pieceName.contains(currentTurn)) {
@@ -358,7 +353,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 
             if (pieceName.contains("King")) {
                 if ((xMovement == 1 && yMovement == 0 || yMovement == 1 && xMovement == 0) || (xMovement == 1 && yMovement == 1)) {
-                    if (checkForOpponentKing(opponentColour, x, y) || isKingInCheck(x, y, currentColour, opponentColour)) {
+                    if (checkForOpponentKing(opponentColour, x, y) || isKingInCheck(x, y, opponentColour)) {
                         validMove = false;
                     } else if (completeMove(x, y, currentColour)) {
                         validMove = true;
@@ -370,9 +365,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
             if (pieceName.contains("Queen")) {
                 if (xMovement == yMovement || xMovement > 0 && yMovement == 0 || xMovement == 0 && yMovement > 0) {
                     if (checkPathIsClear(xMovement, yMovement, initialX, initialY, x, y)) {
-                        if (completeMove(x, y, currentColour)) {
-                            validMove = true;
-                        }
+                            validMove = completeMove(x, y, currentColour);
                     }
                 }
             }
@@ -380,9 +373,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
             if (pieceName.contains("Rook")) {
                 if (xMovement > 0 && yMovement == 0 || xMovement == 0 && yMovement > 0) {
                     if (checkPathIsClear(xMovement, yMovement, initialX, initialY, x, y)) {
-                        if (completeMove(x, y, currentColour)) {
-                            validMove = true;
-                        }
+                            validMove = completeMove(x, y, currentColour);
                     }
                 }
             }
@@ -390,9 +381,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
             if (pieceName.contains("Bishop")) {
                 if (xMovement == yMovement && xMovement > 0) {
                     if (checkPathIsClear(xMovement, yMovement, initialX, initialY, x, y)) {
-                        if (completeMove(x, y, currentColour)) {
-                            validMove = true;
-                        }
+                            validMove = completeMove(x, y, currentColour);
                     }
                 }
             }
@@ -400,9 +389,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 
             if (pieceName.contains("Knight")) {
                 if (((xMovement == 1) && (yMovement == 2)) || ((xMovement == 2) && (yMovement == 1))) {
-                    if (completeMove(x, y, currentColour)) {
-                        validMove = true;
-                    }
+                        validMove = completeMove(x, y, currentColour);
                 }
             }
 
@@ -410,38 +397,23 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                 if (startY == 6) {
                     if (((yMovement == 1) || (yMovement == 2)) && (startY > landingY) && (xMovement == 0)) {
                         if (yMovement == 2) {
-                            if ((!piecePresent(x, y)) && (!piecePresent(x, y + 75))) {
-                                validMove = true;
-                            }
+                            validMove = !piecePresent(x, y) && !piecePresent(x, y + 75);
+
                         } else {
-                            if (!piecePresent(x, y)) {
-                                validMove = true;
-                            }
+                            validMove = !piecePresent(x, y);
                         }
                     } else if ((yMovement == 1) && (startY > landingY) && (xMovement == 1) && piecePresent(x, y)) {
-                        if (completeMove(x, y, currentColour)) {
-                            validMove = true;
-                        }
+                        validMove = completeMove(x, y, currentColour);
                     }
 
                 } else {
                     if ((yMovement == 1) && (startY > landingY) && (xMovement == 0)) {
-                        if (!piecePresent(x, y)) {
-                            validMove = true;
-                            if (landingY == 0) {
-                                success = true;
-                            }
-                        }
+                        validMove = !piecePresent(x, y);
+                        success = landingY == 0;
                     } else if ((yMovement == 1) && (startY > landingY) && (xMovement == 1) && piecePresent(x, y)) {
-                        if (completeMove(x, y, currentColour)) {
-                            validMove = true;
-                        }
-                        if (landingY == 0) {
-                            success = true;
-                        }
+                        validMove = completeMove(x, y, currentColour);
+                        success = landingY == 0;
                     }
-
-
                 }
             }
 
@@ -449,34 +421,20 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                 if (startY == 1) {
                     if (((yMovement == 1) || (yMovement == 2)) && (startY < landingY) && (xMovement == 0)) {
                         if (yMovement == 2) {
-                            if ((!piecePresent(x, y)) && (!piecePresent(x, y - 75))) {
-                                validMove = true;
-                            }
+                            validMove = !piecePresent(x, y) && !piecePresent(x, y - 75);
                         } else {
-                            if (!piecePresent(x, y)) {
-                                validMove = true;
-                            }
+                            validMove = !piecePresent(x, y);
                         }
                     } else if ((yMovement == 1) && (startY < landingY) && (xMovement == 1) && piecePresent(x, y)) {
-                        if (completeMove(x, y, currentColour)) {
-                            validMove = true;
-                        }
+                        validMove = completeMove(x, y, currentColour);
                     }
                 } else {
                     if ((yMovement == 1) && (startY < landingY) && (xMovement == 0)) {
-                        if (!piecePresent(x, y)) {
-                            validMove = true;
-                            if (landingY == 7) {
-                                success = true;
-                            }
-                        }
+                        validMove = !piecePresent(x, y);
+                        success = landingY == 7;
                     } else if ((yMovement == 1) && (startY < landingY) && (xMovement == 1) && piecePresent(x, y)) {
-                        if (completeMove(x, y, currentColour)) {
-                            validMove = true;
-                            if (landingY == 7) {
-                                success = true;
-                            }
-                        }
+                            validMove = completeMove(x, y, currentColour);
+                                success = landingY == 7;
                     }
                 }
             }
@@ -538,7 +496,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                 chessPiece.setVisible(true);
             }
             turnCount++;
-            currentTurn = (turnCount%2==0?"Black":"White");
+            currentTurn = (turnCount % 2 == 0 ? "Black" : "White");
             System.out.println("-------------------------------------------------------------------");
             System.out.println("The piece that is being moved is :" + pieceName);
             System.out.println("The starting coordinates are : " + "( " + startX + "," + startY + ")");
@@ -546,7 +504,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
             System.out.println("The yMovement is : " + yMovement);
             System.out.println("The landing coordinates are : " + "( " + landingX + "," + landingY + ")");
             System.out.println("-------------------------------------------------------------------");
-            System.out.println(currentTurn+" pieces turn to move.");
+            System.out.println(currentTurn + " pieces turn to move.");
         }
 
     }
