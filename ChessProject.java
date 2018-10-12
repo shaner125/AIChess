@@ -231,9 +231,8 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     }
 
     //Checks whether a piece is an opponent
-    private Boolean checkOpponent(String colour, int newX, int newY) {
-        String opponentColour = (colour.equals("Black")) ? "White" : "Black";
-        if (opponentColour.equals(returnName(newX, newY).substring(0, 5))) {
+    private Boolean checkOpponent(String opponentColour, int newX, int newY) {
+        if (returnName(newX, newY).contains(opponentColour)) {
             return true;
         }
         return false;
@@ -272,9 +271,9 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     }
 
     //method that calls all the other methods verifying a move is valid.
-    public boolean completeMove(int xPos, int yPos, String pieceColour) {
+    public boolean completeMove(int xPos, int yPos, String pieceColour, String opponentColour) {
         if (piecePresent(xPos, yPos)) {
-            if (checkOpponent(pieceColour, xPos, yPos)) {
+            if (checkOpponent(opponentColour, xPos, yPos)) {
                 if (returnName(xPos, yPos).contains("King")) {
                     checkmate(pieceColour);
                 } else {
@@ -355,7 +354,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                 if ((xMovement == 1 && yMovement == 0 || yMovement == 1 && xMovement == 0) || (xMovement == 1 && yMovement == 1)) {
                     if (checkForOpponentKing(opponentColour, x, y) || isKingInCheck(x, y, opponentColour)) {
                         validMove = false;
-                    } else if (completeMove(x, y, currentColour)) {
+                    } else if (completeMove(x, y, currentColour, opponentColour)) {
                         validMove = true;
                     }
                 }
@@ -365,7 +364,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
             if (pieceName.contains("Queen")) {
                 if (xMovement == yMovement || xMovement > 0 && yMovement == 0 || xMovement == 0 && yMovement > 0) {
                     if (checkPathIsClear(xMovement, yMovement, initialX, initialY, x, y)) {
-                            validMove = completeMove(x, y, currentColour);
+                            validMove = completeMove(x, y, currentColour, opponentColour);
                     }
                 }
             }
@@ -373,7 +372,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
             if (pieceName.contains("Rook")) {
                 if (xMovement > 0 && yMovement == 0 || xMovement == 0 && yMovement > 0) {
                     if (checkPathIsClear(xMovement, yMovement, initialX, initialY, x, y)) {
-                            validMove = completeMove(x, y, currentColour);
+                            validMove = completeMove(x, y, currentColour, opponentColour);
                     }
                 }
             }
@@ -381,7 +380,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
             if (pieceName.contains("Bishop")) {
                 if (xMovement == yMovement && xMovement > 0) {
                     if (checkPathIsClear(xMovement, yMovement, initialX, initialY, x, y)) {
-                            validMove = completeMove(x, y, currentColour);
+                            validMove = completeMove(x, y, currentColour, opponentColour);
                     }
                 }
             }
@@ -389,7 +388,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 
             if (pieceName.contains("Knight")) {
                 if (((xMovement == 1) && (yMovement == 2)) || ((xMovement == 2) && (yMovement == 1))) {
-                        validMove = completeMove(x, y, currentColour);
+                        validMove = completeMove(x, y, currentColour, opponentColour);
                 }
             }
 
@@ -403,7 +402,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                             validMove = !piecePresent(x, y);
                         }
                     } else if ((yMovement == 1) && (startY > landingY) && (xMovement == 1) && piecePresent(x, y)) {
-                        validMove = completeMove(x, y, currentColour);
+                        validMove = completeMove(x, y, currentColour, opponentColour);
                     }
 
                 } else {
@@ -411,7 +410,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                         validMove = !piecePresent(x, y);
                         success = landingY == 0;
                     } else if ((yMovement == 1) && (startY > landingY) && (xMovement == 1) && piecePresent(x, y)) {
-                        validMove = completeMove(x, y, currentColour);
+                        validMove = completeMove(x, y, currentColour, opponentColour);
                         success = landingY == 0;
                     }
                 }
@@ -426,14 +425,14 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                             validMove = !piecePresent(x, y);
                         }
                     } else if ((yMovement == 1) && (startY < landingY) && (xMovement == 1) && piecePresent(x, y)) {
-                        validMove = completeMove(x, y, currentColour);
+                        validMove = completeMove(x, y, currentColour, opponentColour);
                     }
                 } else {
                     if ((yMovement == 1) && (startY < landingY) && (xMovement == 0)) {
                         validMove = !piecePresent(x, y);
                         success = landingY == 7;
                     } else if ((yMovement == 1) && (startY < landingY) && (xMovement == 1) && piecePresent(x, y)) {
-                            validMove = completeMove(x, y, currentColour);
+                            validMove = completeMove(x, y, currentColour, opponentColour);
                                 success = landingY == 7;
                     }
                 }
