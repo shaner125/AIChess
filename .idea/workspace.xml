@@ -4,7 +4,6 @@
     <list default="true" id="e5b5c471-28d6-44d3-9ce3-5229a040cebc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChessProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/ChessProject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AIChess/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AIChess/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/AIChess/ChessProject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AIChess/ChessProject.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -49,28 +48,28 @@
     <session id="-1947213190">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.15" value="2" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.18" value="1" />
-          <entry key="project.open.time.19" value="2" />
+          <entry key="project.open.time.19" value="3" />
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.25" value="1" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="9936" />
-          <entry key="txt" value="397" />
+          <entry key="java" value="9984" />
+          <entry key="txt" value="507" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="9936" />
-          <entry key="PLAIN_TEXT" value="397" />
+          <entry key="JAVA" value="9984" />
+          <entry key="PLAIN_TEXT" value="507" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -96,8 +95,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ChessProject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="367" column="45" selection-start-line="367" selection-start-column="45" selection-end-line="367" selection-end-column="45" />
+            <state relative-caret-position="216">
+              <caret line="282" column="20" lean-forward="true" selection-start-line="282" selection-start-column="20" selection-end-line="282" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -172,14 +171,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539264511969" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539265858051" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -230,7 +229,8 @@
       <workItem from="1538485647571" duration="11666000" />
       <workItem from="1538589748759" duration="4591000" />
       <workItem from="1539011569233" duration="4913000" />
-      <workItem from="1539186491628" duration="4380000" />
+      <workItem from="1539186491628" duration="5545000" />
+      <workItem from="1539270781871" duration="1185000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed broken Knight movements">
       <created>1538040294569</created>
@@ -281,11 +281,18 @@
       <option name="project" value="LOCAL" />
       <updated>1538736853809</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Cleaned up more booleans, fixed bug with pawns capable of taking pieces vertically.">
+      <created>1539264925019</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1539264925019</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78757000" />
+    <option name="totallyTimeSpent" value="81107000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -300,7 +307,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13020134" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13154362" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -314,7 +321,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32907802" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32907802" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32765958" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
@@ -344,14 +351,27 @@
     <MESSAGE value="Refactored isKingInCheck method, broke into sub-methods, cleaned up code." />
     <MESSAGE value="Enabled feature controlling who's turn it is to move, added alert box for checkmate." />
     <MESSAGE value="Fixed booleans and optimised the checkopponentking method." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed booleans and optimised the checkopponentking method." />
+    <MESSAGE value="Cleaned up more booleans, fixed bug with pawns capable of taking pieces vertically." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up more booleans, fixed bug with pawns capable of taking pieces vertically." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/ChessProject.java</url>
+          <line>349</line>
+          <properties />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/jre/lib/rt.jar!/sun/misc/Unsafe.class" />
     <entry file="file://$PROJECT_DIR$/ChessProject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="367" column="45" selection-start-line="367" selection-start-column="45" selection-end-line="367" selection-end-column="45" />
+        <state relative-caret-position="216">
+          <caret line="282" column="20" lean-forward="true" selection-start-line="282" selection-start-column="20" selection-end-line="282" selection-end-column="20" />
         </state>
       </provider>
     </entry>

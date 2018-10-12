@@ -347,7 +347,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         String currentTurn = (turnCount % 2 == 0) ? "Black" : "White";
 
 
-        if ((((landingX < 0) || (landingX > 7)) || ((landingY < 0) || landingY > 7)) || !pieceName.contains(currentTurn)) {
+        if ((((landingX < 0 && x < 1) || (landingX > 7 && x > 600)) || ((landingY < 0 && y < 1) || landingY > 7 && landingY > 600)) || !pieceName.contains(currentTurn)) {
             validMove = false;
         } else {
 
