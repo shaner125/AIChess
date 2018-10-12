@@ -128,11 +128,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     */
     private Boolean piecePresent(int x, int y) {
         Component c = chessBoard.findComponentAt(x, y);
-        if (c instanceof JPanel) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(c instanceof JPanel);
     }
 
     //Checks for attacking Knights
@@ -212,10 +208,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 
     //Executes methods to assess whether king is in check.
     private Boolean isKingInCheck(int xPos, int yPos, String opponentColour) {
-        if (knightCheck(xPos, yPos, opponentColour) || straightCheck(xPos, yPos, opponentColour) || diagonalCheck(xPos, yPos, opponentColour)) {
-            return true;
-        }
-        return false;
+        return knightCheck(xPos, yPos, opponentColour) || straightCheck(xPos, yPos, opponentColour) || diagonalCheck(xPos, yPos, opponentColour);
     }
 
     //Checks whether there is an opposing adjacent king where your king is moving.
@@ -232,14 +225,11 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 
     //Checks whether a piece is an opponent
     private Boolean checkOpponent(String opponentColour, int newX, int newY) {
-        if (returnName(newX, newY).contains(opponentColour)) {
-            return true;
-        }
-        return false;
+        return returnName(newX, newY).contains(opponentColour);
     }
 
     //Checks whether path is clear between two points on board.
-    public boolean checkPathIsClear(int xMovement, int yMovement, int startX, int startY, int landingX, int landingY) {
+    private boolean checkPathIsClear(int xMovement, int yMovement, int startX, int startY, int landingX, int landingY) {
 
         int XDirection = ((landingX - startX) < 0 ? -75 : 75);
         int YDirection = ((landingY - startY) < 0 ? -75 : 75);
@@ -271,7 +261,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     }
 
     //method that calls all the other methods verifying a move is valid.
-    public boolean completeMove(int xPos, int yPos, String pieceColour, String opponentColour) {
+    private boolean completeMove(int xPos, int yPos, String pieceColour, String opponentColour) {
         if (piecePresent(xPos, yPos)) {
             if (checkOpponent(opponentColour, xPos, yPos)) {
                 if (returnName(xPos, yPos).contains("King")) {
@@ -288,7 +278,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         return false;
     }
 
-    public void checkmate(String winner) {
+    private void checkmate(String winner) {
         JOptionPane.showMessageDialog(null, winner + " has won the game!");
         System.exit(1);
     }
@@ -329,11 +319,11 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         if (chessPiece == null) return;
 
         chessPiece.setVisible(false);
-        Boolean success = false;
+        boolean success = false;
         Component c = chessBoard.findComponentAt(e.getX(), e.getY());
         String tmp = chessPiece.getIcon().toString();
         String pieceName = tmp.substring(0, (tmp.length() - 4));
-        Boolean validMove = false;
+        boolean validMove = false;
 
         int landingX = (e.getX() / 75);
         int landingY = (e.getY() / 75);
@@ -359,7 +349,6 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                     }
                 }
             }
-
 
             if (pieceName.contains("Queen")) {
                 if (xMovement == yMovement || xMovement > 0 && yMovement == 0 || xMovement == 0 && yMovement > 0) {
@@ -432,7 +421,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                         validMove = !piecePresent(x, y);
                         success = landingY == 7;
                     } else if ((yMovement == 1) && (startY < landingY) && (xMovement == 1) && piecePresent(x, y)) {
-                            validMove = completeMove(x, y, currentColour, opponentColour);
+                                validMove = completeMove(x, y, currentColour, opponentColour);
                                 success = landingY == 7;
                     }
                 }
@@ -469,7 +458,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                         parent.add(pieces);
                     }
                 } else if (((tmp1.contains("White")))) {
-                    int location = 0 + (e.getX() / 75);
+                    int location = (e.getX() / 75);
                     if (c instanceof JLabel) {
                         Container parent = c.getParent();
                         parent.remove(0);
