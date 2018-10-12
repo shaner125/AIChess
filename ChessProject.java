@@ -8,21 +8,21 @@ import javax.swing.*;
 */
 
 public class ChessProject extends JFrame implements MouseListener, MouseMotionListener {
-    JLayeredPane layeredPane;
-    JPanel chessBoard;
-    JLabel chessPiece;
-    int xAdjustment;
-    int yAdjustment;
-    int startX;
-    int startY;
-    int initialX;
-    int initialY;
-    JPanel panels;
-    JLabel pieces;
-    int turnCount = 1;
+    private JLayeredPane layeredPane;
+    private JPanel chessBoard;
+    private JLabel chessPiece;
+    private int xAdjustment;
+    private int yAdjustment;
+    private int startX;
+    private int startY;
+    private int initialX;
+    private int initialY;
+    private JPanel panels;
+    private JLabel pieces;
+    private int turnCount = 1;
 
 
-    public ChessProject() {
+    private ChessProject() {
         Dimension boardSize = new Dimension(600, 600);
 
         //  Use a Layered Pane for this application
@@ -446,7 +446,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
             }
         }
         if (!validMove) {
-            int location = 0;
+            int location;
             if (startY == 0) {
                 location = startX;
             } else {
@@ -470,7 +470,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                         parent = (JPanel) chessBoard.getComponent(location);
                         parent.add(pieces);
                     } else {
-                        Container parent = (Container) c;
+                        Container parent;
                         pieces = new JLabel(new ImageIcon("WhiteQueen.png"));
                         parent = (JPanel) chessBoard.getComponent(location);
                         parent.add(pieces);
@@ -484,7 +484,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
                         parent = (JPanel) chessBoard.getComponent(location);
                         parent.add(pieces);
                     } else {
-                        Container parent = (Container) c;
+                        Container parent;
                         pieces = new JLabel(new ImageIcon("BlackQueen.png"));
                         parent = (JPanel) chessBoard.getComponent(location);
                         parent.add(pieces);
